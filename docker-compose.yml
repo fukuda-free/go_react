@@ -15,7 +15,8 @@ services:
     container_name: go_react_go
     build: ./go
     volumes:
-      - ./go:/go/src
+      - ./go/src:/go/src
+      # - ./go:/usr/local/go/src
     tty: true
     ports:
       - "3000:3000"
