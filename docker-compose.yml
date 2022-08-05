@@ -1,0 +1,33 @@
+version: '3'
+services:
+  mysql:
+    container_name: go_react_mysql
+    image: public.ecr.aws/docker/library/mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      TZ: "Asia/Tokyo"
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  go:
+    container_name: go_react_go
+    build: ./go
+    volumes:
+      - ./go:/go/src
+    tty: true
+    ports:
+      - "3000:3000"
+
+  # react:
+  #   container_name: go_react_react
+  #   build: ./react
+  #   volumes:
+  #     - ./react:/usr/src
+  #   tty: true
+  #   ports:
+  #     - "3001:3000"
+
+volumes:
+  mysql_data:

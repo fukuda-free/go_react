@@ -1,0 +1,39 @@
+{
+  "recommendations": [
+    ///////////////////////////////////////
+    // 基本設定
+    ///////////////////////////////////////
+    // メニューを日本語化
+    "ms-ceintl.vscode-language-pack-ja",
+    // sublimeのショートカットが使える
+    "ms-vscode.sublime-keybindings",
+    // gitのグラフを表示
+    "mhutchie.git-graph",
+    // 改行等を見やすく表示
+    "chihiro718.whitespacepp",
+    // キャメルケースに変換など
+    "wmaurer.change-case",
+    // live shareを使える
+    "ms-vsliveshare.vsliveshare",
+    // ESLint(JavaScript の静的コード解析ツールESLint をVS Code に統合する)
+    "dbaeumer.vscode-eslint",
+    // stylelint(CSS 用のリンターstylelint をVS Code に統合する)
+    "stylelint.vscode-stylelint",
+    // Prettier(コード自動整形ツールPrettier をVS Code に統合する)
+    "esbenp.prettier-vscode",
+    // Visual Studio IntelliCode(AI 支援によりAPI サジェスト一覧の精度を向上させる)
+    "VisualStudioExptTeam.vscodeintellicode",
+    // Bracket Pair Colorizer 2(JavaScript の静的コード解析ツールESLint をVS Code に統合する)
+    "CoenraadS.bracket-pair-colorizer-2",
+    // indent-rainbow(インデントの階層を色分けして見やすくしてくれる)
+    "oderwat.indent-rainbow",
+    // vscode-icons(左ペインのExplorer のファイルアイコンをバリエーション豊かにしてくれる)
+    "vscode-icons-team.vscode-icons",
+    // Import Cost(モジュールをインポートしている文の横に、算出したバンドルサイズを表示してくれる)
+    "wix.vscode-import-cost",
+    // Debugger for Chrome(VS Code 上でブレークポイントの設定や変数の監視といったデバッガの機能が使えるようになる)
+    "msjsdiag.debugger-for-chrome",
+    // Live Share(複数人によるリアルタイムのコーディングコラボレーションを実現する)
+    "ms-vsliveshare.vsliveshare",
+  ]
+}
