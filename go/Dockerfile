@@ -12,9 +12,9 @@ WORKDIR ${ROOT}
 
 
 
-COPY src/go.mod .
-COPY src/go.sum .
-RUN go mod download
+# COPY src/go.mod .
+# COPY src/go.sum .
+# RUN go mod download
 
 
 
