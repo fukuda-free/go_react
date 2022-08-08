@@ -1,38 +1,54 @@
 package main
 
 import (
-        "net/http"
+	"database/sql"
+	"fmt"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
-// func main() {
-//         http.ListenAndServe("", http.NotFoundHandler())
-// }
-
-// func main() {
-//         http.ListenAndServe("", http.FileServer(http.Dir(".")))
-// }
-
-// func main() {
-//         hh := func(w http.ResponseWriter, rq *http.Request) {
-//                 w.Write([]byte("Hello, This is GO-server!!"))
-//         }
-
-//         http.HandleFunc("/hello", hh)
-
-//         http.ListenAndServe("", nil)
-// }
-
-
 func main() {
-        msg := `<html><body>
-                <h1>Hello</h1>
-                <p>This is GO-server!!</p>
-                </body></html>`
-        hh := func(w http.ResponseWriter, rq *http.Request) {
-                w.Write([]byte(msg))
-        }
+	db, err := sql.Open("mysql", "root:@/my_database")
+	if err != nil {
+		panic(err.Error())
+	}
+	defer db.Close() // 関数がリターンする直前に呼び出される
 
-        http.HandleFunc("/hello", hh)
+	rows, err := db.Query("SELECT * FROM users") //
+	if err != nil {
+		panic(err.Error())
+	}
 
-        http.ListenAndServe("", nil)
+	columns, err := rows.Columns() // カラム名を取得
+	if err != nil {
+		panic(err.Error())
+	}
+
+	values := make([]sql.RawBytes, len(columns))
+
+	//  rows.Scan は引数に `[]interface{}`が必要.
+
+	scanArgs := make([]interface{}, len(values))
+	for i := range values {
+		scanArgs[i] = &values[i]
+	}
+
+	for rows.Next() {
+		err = rows.Scan(scanArgs...)
+		if err != nil {
+			panic(err.Error())
+		}
+
+		var value string
+		for i, col := range values {
+			// Here we can check if the value is nil (NULL value)
+			if col == nil {
+				value = "NULL"
+			} else {
+				value = string(col)
+			}
+			fmt.Println(columns[i], ": ", value)
+		}
+		fmt.Println("-----------------------------------")
+	}
 }
