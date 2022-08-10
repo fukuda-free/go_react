@@ -22,8 +22,5 @@ RUN go install github.com/ramya-rao-a/go-outline@latest
 
 # beegoで必要なプラグイン
 # RUN go get "github.com/go-sql-driver/mysql"
-# RUN go install github.com/go-sql-driver/mysql@latest
-
 # RUN go get "github.com/beego/bee"
 # RUN go get "github.com/astaxie/beego"
-# # RUN go install github.com/beego/bee/v2@latest

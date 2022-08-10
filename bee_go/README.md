@@ -52,6 +52,9 @@ bee run
 
 ----
 
+go get -u github.com/beego/bee
+go get -u github.com/astaxie/beego
+
 
 bee api testapi
 cd testapi
@@ -65,5 +68,165 @@ bee generate model sample_mst -fields="name:int"
 
 ----------------------
 
+
+go install github.com/beego/bee/v2@latest
+bee api testapi
+cd testapi
+go get testapi
+bee run
+
+bee generate scaffold comment -fields="content:string" -driver=mysql -conn="root:password@tcp(mysql:3306)/test_db"
+
+
+bee api sample -driver=mysql -conn=root:password@tcp"(mysql:3306)"/test_db
+
+----------------------
+
+root@1a38f9c1e98f:/go/src# bee help api
+2022/08/10 02:38:58.134 [D]  init global config instance failed. If you do not use this, just ignore it.  open conf/app.conf: no such file or directory
+USAGE
+  bee api [appname]
+
+OPTIONS
+  -beego
+      set beego version,only take effect by go mod
+
+  -conn
+      Connection string used by the driver to connect to a database instance.
+
+  -driver
+      Database driver. Either mysql, postgres or sqlite.
+
+  -gopath
+      Support go path,default false
+
+  -tables
+      List of table names separated by a comma.
+
+DESCRIPTION
+  The command 'api' creates a Beego API application.
+  now default supoort generate a go modules project.
+
+  Example:
+      $ bee api [appname] [-tables=""] [-driver=mysql] [-conn="root:@tcp(127.0.0.1:3306)/test"]  [-gopath=false] [-beego=v1.12.3]
+
+  If 'conn' argument is empty, the command will generate an example API application. Otherwise the command
+  will connect to your database and generate models based on the existing tables.
+
+  The command 'api' creates a folder named [appname] with the following structure:
+
+            ├── main.go
+            ├── go.mod
+            ├── conf
+            │     └── app.conf
+            ├── controllers
+            │     └── object.go
+            │     └── user.go
+            ├── routers
+            │     └── router.go
+            ├── tests
+            │     └── default_test.go
+            └── models
+                  └── object.go
+                  └── user.go
+
+--------------------
+
+bee api testapi -driver=mysql -conn=root:password@tcp"(mysql:3306)"/test_db
+
+--------------------
+root@1a38f9c1e98f:/go/src/testapi# bee help dockerize
+USAGE
+  bee dockerize
+
+OPTIONS
+  -expose=8080
+      Port(s) to expose in the Docker container.
+
+  -image=library/golang
+      Set the base image of the Docker container.
+
+DESCRIPTION
+  Dockerize generates a Dockerfile for your Beego Web Application.
+  The Dockerfile will compile, get the dependencies with godep, and set the entrypoint.
+
+  Example:
+    $ bee dockerize -expose="3000,80,25"
+
+bee generate scaffold comment -fields="content:string"
+--------------------
+root@1a38f9c1e98f:/go/src/testapi# bee help generate
+USAGE
+  bee generate [command]
+
+OPTIONS
+  -conn
+      Connection string used by the SQLDriver to connect to a database instance.
+
+  -ctrlDir
+      Controller directory. Bee scans this directory and its sub directory to generate routers
+
+  -ddl
+      Generate DDL Migration
+
+  -driver
+      Database SQLDriver. Either mysql, postgres or sqlite.
+
+  -fields
+      List of table Fields.
+
+  -level
+      Either 1, 2 or 3. i.e. 1=models; 2=models and controllers; 3=models, controllers and routers.
+
+  -routersFile
+      Routers file. If not found, Bee create a new one. Bee will truncates this file and output routers info into this file
+
+  -routersPkg
+      router's package. Default is routers, it means that "package routers" in the generated file
+
+  -tables
+      List of table names separated by a comma.
+
+DESCRIPTION
+  ▶ To scaffold out your entire application:
+
+     $ bee generate scaffold [scaffoldname] [-fields="title:string,body:text"] [-driver=mysql] [-conn="root:@tcp(127.0.0.1:3306)/test"]
+
+  ▶ To generate a Model based on fields:
+
+     $ bee generate model [modelname] [-fields="name:type"]
+
+  ▶ To generate a controller:
+
+     $ bee generate controller [controllerfile]
+
+  ▶ To generate a CRUD view:
+
+     $ bee generate view [viewpath]
+
+  ▶ To generate a migration file for making database schema updates:
+
+     $ bee generate migration [migrationfile] [-fields="name:type"]
+
+  ▶ To generate swagger doc file:
+
+     $ bee generate docs
+
+    ▶ To generate swagger doc file:
+
+     $ bee generate routers [-ctrlDir=/path/to/controller/directory] [-routersFile=/path/to/routers/file.go] [-routersPkg=myPackage]
+
+  ▶ To generate a test case:
+
+     $ bee generate test [routerfile]
+
+  ▶ To generate appcode based on an existing database:
+
+     $ bee generate appcode [-tables=""] [-driver=mysql] [-conn="root:@tcp(127.0.0.1:3306)/test"] [-level=3]
+
+--------------------
+
+
+bee generate scaffold comment -fields="content:string" -driver=mysql -conn="root:password@tcp(mysql:3306)/test_db"
 
 
