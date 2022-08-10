@@ -1,0 +1,1 @@
+/go/src/sample/views/post/show.tpl

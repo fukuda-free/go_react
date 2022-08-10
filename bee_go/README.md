@@ -230,3 +230,91 @@ DESCRIPTION
 bee generate scaffold comment -fields="content:string" -driver=mysql -conn="root:password@tcp(mysql:3306)/test_db"
 
 
+--------------------
+go mod init beego
+go install github.com/beego/bee/v2@latest
+go get -u github.com/go-sql-driver/mysql
+go get -u github.com/jmoiron/sqlx
+
+
+            go get "github.com/go-sql-driver/mysql"
+            go get "github.com/beego/bee"
+            go get "github.com/astaxie/beego"
+            go get "github.com/astaxie/beego/session"
+            go get "golang.org/x/crypto/bcrypt"
+            go get "github.com/PuerkitoBio/goquery"
+            go get "github.com/microcosm-cc/bluemonday"
+
+
+bee api sample -driver=mysql -conn=root:password@tcp"(mysql:3306)"/test_db
+cd sample
+go get sample
+
+
+bee generate scaffold post -fields="title:string,body:text" -driver=mysql
+
+
+--------------------
+go mod init beego
+go install github.com/beego/bee/v2@latest
+go get -u github.com/go-sql-driver/mysql
+go get -u github.com/jmoiron/sqlx
+
+bee api sample -driver=mysql -conn="root:password@tcp(mysql:3306)/test_db"
+cd sample
+go get sample
+bee generate scaffold post -fields="title:string,body:text" -driver=mysql  -conn="root:password@tcp(db_mysql)/test_db"
+
+
+bee migrate -driver=mysql -conn="root:password@tcp(db_mysql)/test_db"
+
+
+
+--------------------
+go mod init beego
+go install github.com/beego/bee/v2@latest
+go get -u github.com/go-sql-driver/mysql
+go get -u github.com/jmoiron/sqlx
+
+bee api sample -driver=mysql -conn="root:password@tcp(mysql:3306)/test_db"
+
+bee generate scaffold post -fields="title:string,body:text"
+go get sample/database/migrations
+go mod tidy
+
+bee migrate -driver=mysql -conn="root:password@tcp(mysql:3306)/test_db"
+
+
+--------------------
+go mod init beego
+go install github.com/beego/bee/v2@latest
+go get -u github.com/go-sql-driver/mysql
+go get -u github.com/jmoiron/sqlx
+
+bee api sample -driver=mysql -conn="root:password@tcp(mysql:3306)/test_db"
+cd sample
+go mod tidy
+
+bee generate scaffold post -fields="title:string,body:text"
+go get sample/database/migrations
+go mod tidy
+
+bee migrate -driver=mysql -conn="root:password@tcp(mysql:3306)/test_db"
+
+
+--------------------
+go mod init beego
+go install github.com/beego/bee/v2@latest
+go get -u github.com/go-sql-driver/mysql
+go get -u github.com/jmoiron/sqlx
+
+bee api sample -driver=mysql -conn="root:password@tcp(mysql:3306)/test_db"
+cd sample
+go mod tidy
+
+bee generate scaffold post -fields="title:string,body:text" -driver=mysql -conn="root:password@tcp(mysql:3306)/test_db"
+
+bee generate scaffold post2 -fields="title:string,body:text" -driver=mysql -conn="root:password@tcp(mysql:3306)/test_db"
+
+
+
